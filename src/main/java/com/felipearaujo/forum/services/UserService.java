@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.felipearaujo.forum.domain.entities.User;
+import com.felipearaujo.forum.dto.UserDTO;
 import com.felipearaujo.forum.repositories.UserRepository;
 import com.felipearaujo.forum.services.exceptions.ObjectNotFoundException;
 
@@ -29,5 +30,13 @@ public class UserService {
 		}catch(NoSuchElementException e) {
 			throw new ObjectNotFoundException("Id not found : " + id);
 		}
+	}
+	
+	public User insert(User user) {
+		return userRepository.insert(user);
+	}
+	
+	public User fromDTO(UserDTO userDTO) {
+		return new User(userDTO.getId(), userDTO.getName(), userDTO.getEmail());
 	}
 }
